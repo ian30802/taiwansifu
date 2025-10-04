@@ -132,8 +132,6 @@
     </footer>
 
     <script>
-        let lastScrollTop = 0;
-
         function toggleMenu(button){
             const nav = document.getElementById('navMenu');
             nav.classList.toggle('show');
@@ -152,20 +150,15 @@
             button.src = button.dataset.hamburger;
         }
 
-        // 偵測捲動方向，自動收合選單
+        // 一滑動就自動收合選單
         window.addEventListener('scroll', function(){
             const nav = document.getElementById('navMenu');
             const button = document.querySelector('.hamburger');
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-
-            if(st > lastScrollTop && nav.classList.contains('show')){
-                // 下滑且選單展開 → 收合
+            if(nav.classList.contains('show')){
                 nav.classList.remove('show');
                 button.src = button.dataset.hamburger;
             }
-
-            lastScrollTop = st <= 0 ? 0 : st;
-        }, false);
+        });
     </script>
 </body>
 </html>
