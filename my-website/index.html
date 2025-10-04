@@ -41,6 +41,7 @@
             z-index: -1;
         }
 
+        /* 導覽列 */
         header {
             display: flex;
             justify-content: space-between;
@@ -65,12 +66,14 @@
             cursor: pointer;
         }
 
+        /* Hero 區塊 */
         .hero { height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center; }
         .hero h1 { font-size: 48px; margin: 0; }
 
         section { padding: 60px 20px; max-width: 1000px; margin: auto; }
         footer { text-align: center; padding: 20px; background: #f2f2f2; margin-top: 40px; }
 
+        /* 手機版 */
         @media (max-width: 600px) {
             .hamburger { display: block; }
 
@@ -93,7 +96,7 @@
 </head>
 <body>
     <header>
-        <img src="圖片images/logo中文字.png" alt="Logo" class="logo">
+        <img src="圖片images/logo中文字.png" alt="台灣媳婦切仔麵 Logo" class="logo">
         <img src="圖片images/hamburger.png" 
              alt="漢堡選單" 
              class="hamburger" 
@@ -101,9 +104,9 @@
              data-close="圖片images/close.png"
              onclick="toggleMenu(this)">
         <nav id="navMenu">
-            <a href="#about">關於我們</a>
-            <a href="#products">產品介紹</a>
-            <a href="#contact">聯絡我們</a>
+            <a href="#about" onclick="closeMenu()">關於我們</a>
+            <a href="#products" onclick="closeMenu()">產品介紹</a>
+            <a href="#contact" onclick="closeMenu()">聯絡我們</a>
         </nav>
     </header>
 
@@ -138,12 +141,19 @@
             const nav = document.getElementById('navMenu');
             nav.classList.toggle('show');
 
-            // 使用 data 屬性切換圖示
-            if(button.src.includes(button.dataset.hamburger)){
+            // 選單展開時顯示叉叉，收合時顯示漢堡
+            if(nav.classList.contains('show')){
                 button.src = button.dataset.close;
             } else {
                 button.src = button.dataset.hamburger;
             }
+        }
+
+        function closeMenu(){
+            const nav = document.getElementById('navMenu');
+            const button = document.querySelector('.hamburger');
+            nav.classList.remove('show');
+            button.src = button.dataset.hamburger;
         }
     </script>
 </body>
