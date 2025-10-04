@@ -55,15 +55,8 @@
 
         .logo { height: 50px; width: auto; }
 
-        nav {
-            display: flex;
-        }
-
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #333;
-        }
+        nav { display: flex; }
+        nav a { margin-left: 20px; text-decoration: none; color: #333; }
 
         .hamburger {
             display: none;
@@ -72,30 +65,12 @@
             cursor: pointer;
         }
 
-        .hero {
-            height: 70vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
+        .hero { height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center; }
         .hero h1 { font-size: 48px; margin: 0; }
 
-        section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+        section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+        footer { text-align: center; padding: 20px; background: #f2f2f2; margin-top: 40px; }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #f2f2f2;
-            margin-top: 40px;
-        }
-
-        /* 手機版 */
         @media (max-width: 600px) {
             .hamburger { display: block; }
 
@@ -112,7 +87,6 @@
             }
 
             nav a { margin: 15px 20px; }
-
             nav.show { max-height: 300px; }
         }
     </style>
@@ -120,11 +94,11 @@
 <body>
     <header>
         <img src="圖片images/logo中文字.png" alt="Logo" class="logo">
-        <img src="圖片images/漢堡按鈕.png" 
+        <img src="圖片images/hamburger.png" 
              alt="漢堡選單" 
              class="hamburger" 
-             data-hamburger="圖片images/漢堡按鈕.png" 
-             data-close="圖片images/叉叉按鈕.png"
+             data-hamburger="圖片images/hamburger.png" 
+             data-close="圖片images/close.png"
              onclick="toggleMenu(this)">
         <nav id="navMenu">
             <a href="#about">關於我們</a>
