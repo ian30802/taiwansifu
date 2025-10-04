@@ -5,7 +5,6 @@
     <title>台灣媳婦</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* 基本設定 */
         html, body {
             margin: 0;
             padding: 0;
@@ -42,7 +41,6 @@
             z-index: -1;
         }
 
-        /* 導覽列 */
         header {
             display: flex;
             justify-content: space-between;
@@ -55,10 +53,7 @@
             z-index: 10;
         }
 
-        .logo {
-            height: 50px;
-            width: auto;
-        }
+        .logo { height: 50px; width: auto; }
 
         nav {
             display: flex;
@@ -70,7 +65,6 @@
             color: #333;
         }
 
-        /* 漢堡按鈕圖片 */
         .hamburger {
             display: none;
             width: 40px;
@@ -78,7 +72,6 @@
             cursor: pointer;
         }
 
-        /* Hero 區塊 */
         .hero {
             height: 70vh;
             display: flex;
@@ -87,10 +80,7 @@
             text-align: center;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            margin: 0;
-        }
+        .hero h1 { font-size: 48px; margin: 0; }
 
         section {
             padding: 60px 20px;
@@ -105,7 +95,7 @@
             margin-top: 40px;
         }
 
-        /* 手機版漢堡選單 */
+        /* 手機版 */
         @media (max-width: 600px) {
             .hamburger { display: block; }
 
@@ -121,9 +111,7 @@
                 transition: max-height 0.3s ease-out;
             }
 
-            nav a {
-                margin: 15px 20px;
-            }
+            nav a { margin: 15px 20px; }
 
             nav.show { max-height: 300px; }
         }
@@ -131,8 +119,13 @@
 </head>
 <body>
     <header>
-        <img src="圖片images/logo中文字.png" alt="台灣媳婦切仔麵 Logo" class="logo">
-        <img src="圖片images/漢堡按鈕.png" alt="漢堡選單" class="hamburger" onclick="toggleMenu(this)">
+        <img src="圖片images/logo中文字.png" alt="Logo" class="logo">
+        <img src="圖片images/漢堡按鈕.png" 
+             alt="漢堡選單" 
+             class="hamburger" 
+             data-hamburger="圖片images/漢堡按鈕.png" 
+             data-close="圖片images/叉叉按鈕.png"
+             onclick="toggleMenu(this)">
         <nav id="navMenu">
             <a href="#about">關於我們</a>
             <a href="#products">產品介紹</a>
@@ -171,11 +164,11 @@
             const nav = document.getElementById('navMenu');
             nav.classList.toggle('show');
 
-            // 切換漢堡圖 / 叉叉圖
-            if(button.src.includes('漢堡按鈕.png')){
-                button.src = '圖片images/叉叉按鈕.png';
+            // 使用 data 屬性切換圖示
+            if(button.src.includes(button.dataset.hamburger)){
+                button.src = button.dataset.close;
             } else {
-                button.src = '圖片images/漢堡按鈕.png';
+                button.src = button.dataset.hamburger;
             }
         }
     </script>
