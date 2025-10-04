@@ -1,184 +1,137 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <title>台灣媳婦</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-            font-family: sans-serif;
-            position: relative;
-        }
+<meta charset="UTF-8">
+<title>台灣媳婦</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {margin:0; padding:0; min-height:100%; font-family:sans-serif; position:relative;}
 
-        /* 背景圖層 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            background-image:
-                url('圖片images/背景圖.jpeg'),
-                url('圖片images/背景圖2.jpeg'),
-                url('圖片images/背景圖3.jpeg');
-            background-repeat: repeat;
-            background-size: auto;
-        }
+/* 背景 */
+body::before{
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
+    background-image: url('圖片images/背景圖.jpeg'), url('圖片images/背景圖2.jpeg'), url('圖片images/背景圖3.jpeg');
+    background-repeat: repeat; background-size: auto;
+}
+body::after{
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px); z-index:-1;
+}
 
-        /* 背景模糊遮罩 */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px);
-            z-index: -1;
-        }
+header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px; background-color: rgba(255,255,255,0.8);
+    border-bottom:1px solid #ddd;
+    position:fixed; top:0; left:0; width:100%; z-index:10;
+    transition: top 0.3s ease;
+    max-width:1200px; margin:0 auto; flex-wrap:wrap;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-            background-color: rgba(255,255,255,0.8);
-            position: fixed; /* 固定在最上方 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            transition: top 0.3s ease;
-        }
+.logo{height:50px; width:auto;}
+nav{
+    display:flex; flex-wrap:wrap; gap:20px; flex-shrink:1;
+}
+nav a{ text-decoration:none; color:#333; }
 
-        .logo { height: 50px; width: auto; }
+.hero{height:70vh; display:flex; justify-content:center; align-items:center; text-align:center;}
+.hero h1{font-size:48px; margin:0;}
 
-        nav { display: flex; }
-        nav a { margin-left: 20px; text-decoration: none; color: #333; }
+section{padding:60px 20px; max-width:1000px; margin:auto;}
+footer{text-align:center; padding:20px; background:#f2f2f2; margin-top:40px;}
 
-        .hamburger {
-            display: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
+/* 漢堡/叉叉按鈕容器 */
+.hamburger {
+    display:none; width:40px; height:40px; cursor:pointer; position:relative;
+}
+.hamburger img {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
+    transform-origin:center center;
+}
+.hamburger img.close {opacity:0; transform: rotate(0deg) scale(0.5);}
+.hamburger.active img.hamburger-img {opacity:0; transform: rotate(-180deg) scale(0.5);}
+.hamburger.active img.close {opacity:1; transform: rotate(0deg) scale(1);}
 
-        .hero { height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: 48px; margin: 0; }
-
-        section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-        footer { text-align: center; padding: 20px; background: #f2f2f2; margin-top: 40px; }
-
-        @media (max-width: 600px) {
-            .hamburger { display: block; }
-
-            nav {
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                flex-direction: column;
-                background-color: rgba(255,255,255,0.95);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-out;
-            }
-
-            nav a { margin: 15px 20px; }
-            nav.show { max-height: 300px; }
-        }
-    </style>
+/* 手機版樣式 */
+@media(max-width:600px){
+    .hamburger{display:block;}
+    nav{
+        position:absolute; top:70px; left:0; width:100%;
+        flex-direction:column; background-color: rgba(255,255,255,0.95);
+        max-height:0; overflow:hidden; transition:max-height 0.3s ease-out;
+    }
+    nav.show{ max-height:300px; }
+    nav a{ margin:15px 20px; }
+}
+</style>
 </head>
 <body>
-    <header id="mainHeader">
-        <img src="圖片images/logo中文字.png" alt="台灣媳婦切仔麵 Logo" class="logo">
-        <img src="圖片images/hamburger.png" 
-             alt="漢堡選單" 
-             class="hamburger" 
-             data-hamburger="圖片images/hamburger.png" 
-             data-close="圖片images/close.png"
-             onclick="toggleMenu(this)">
-        <nav id="navMenu">
-            <a href="#about" onclick="closeMenu()">關於我們</a>
-            <a href="#products" onclick="closeMenu()">產品介紹</a>
-            <a href="#contact" onclick="closeMenu()">聯絡我們</a>
-        </nav>
-    </header>
+<header id="mainHeader">
+    <img src="圖片images/logo中文字.png" class="logo" alt="台灣媳婦 Logo">
+    <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+        <img src="圖片images/漢堡按鈕.png" class="hamburger-img" alt="漢堡按鈕">
+        <img src="圖片images/叉叉按鈕.png" class="close" alt="叉叉按鈕">
+    </div>
+    <nav id="navMenu">
+        <a href="#about" onclick="closeMenu()">關於我們</a>
+        <a href="#products" onclick="closeMenu()">產品介紹</a>
+        <a href="#contact" onclick="closeMenu()">聯絡我們</a>
+    </nav>
+</header>
 
-    <section class="hero">
-        <div>
-            <h1>台灣媳婦</h1>
-            <p>傳承在地味道，溫暖每一道料理</p>
-        </div>
-    </section>
+<section class="hero">
+    <div><h1>台灣媳婦</h1><p>傳承在地味道，溫暖每一道料理</p></div>
+</section>
 
-    <section id="about">
-        <h2>關於我們</h2>
-        <p>「台灣媳婦」源自台灣在地美食文化，致力於傳遞手作風味與家的溫度。我們堅持選用天然食材，結合傳統工法與現代品質，用最道地的方式陪伴每一個家庭的餐桌。</p>
-    </section>
+<section id="about">
+<h2>關於我們</h2>
+<p>「台灣媳婦」源自台灣在地美食文化，致力於傳遞手作風味與家的溫度。我們堅持選用天然食材，結合傳統工法與現代品質，用最道地的方式陪伴每一個家庭的餐桌。</p>
+</section>
 
-    <section id="products">
-        <h2>產品介紹</h2>
-        <p>我們提供各式台灣傳統料理、調理包、伴手禮及特色美食，未來此區可加入產品圖片與簡介。</p>
-    </section>
+<section id="products">
+<h2>產品介紹</h2>
+<p>我們提供各式台灣傳統料理、調理包、伴手禮及特色美食，未來此區可加入產品圖片與簡介。</p>
+</section>
 
-    <section id="contact">
-        <h2>聯絡我們</h2>
-        <p>Email：example@mail.com<br>電話：(02)2759-8202<br>地址：台北市信義區松德路215號</p>
-    </section>
+<section id="contact">
+<h2>聯絡我們</h2>
+<p>Email：example@mail.com<br>電話：(02)2759-8202<br>地址：台北市信義區松德路215號</p>
+</section>
 
-    <footer>
-        <p>© 2025 台灣媳婦｜保留所有權利</p>
-    </footer>
+<footer>
+<p>© 2025 台灣媳婦｜保留所有權利</p>
+</footer>
 
-    <script>
-        let lastScrollTop = 0;
-        const header = document.getElementById('mainHeader');
+<script>
+const header = document.getElementById('mainHeader');
+const hamburger = document.getElementById('hamburgerBtn');
+const nav = document.getElementById('navMenu');
+let lastScrollTop = 0;
 
-        function toggleMenu(button){
-            const nav = document.getElementById('navMenu');
-            nav.classList.toggle('show');
+function toggleMenu(){
+    nav.classList.toggle('show');
+    hamburger.classList.toggle('active');
+}
 
-            if(nav.classList.contains('show')){
-                button.src = button.dataset.close;
-            } else {
-                button.src = button.dataset.hamburger;
-            }
-        }
+function closeMenu(){
+    nav.classList.remove('show');
+    hamburger.classList.remove('active');
+}
 
-        function closeMenu(){
-            const nav = document.getElementById('navMenu');
-            const button = document.querySelector('.hamburger');
-            nav.classList.remove('show');
-            button.src = button.dataset.hamburger;
-        }
+// header 自動隱藏/顯示 & 滑動收合選單
+window.addEventListener('scroll', function(){
+    let st = window.pageYOffset || document.documentElement.scrollTop;
 
-        // 偵測捲動，自動收合選單 + header 自動隱藏/顯示
-        window.addEventListener('scroll', function(){
-            const nav = document.getElementById('navMenu');
-            const button = document.querySelector('.hamburger');
-            let st = window.pageYOffset || document.documentElement.scrollTop;
+    // header 下滑隱藏，上滑顯示
+    if(st > lastScrollTop){ header.style.top='-100px'; } else { header.style.top='0'; }
+    lastScrollTop = st<=0 ? 0 : st;
 
-            // 選單自動收合
-            if(nav.classList.contains('show')){
-                nav.classList.remove('show');
-                button.src = button.dataset.hamburger;
-            }
-
-            // header 自動隱藏/顯示
-            if(st > lastScrollTop){
-                // 下滑 → 隱藏 header
-                header.style.top = '-100px';
-            } else {
-                // 上滑 → 顯示 header
-                header.style.top = '0';
-            }
-
-            lastScrollTop = st <= 0 ? 0 : st;
-        });
-    </script>
+    // 滾動時自動收合選單
+    if(nav.classList.contains('show')){ closeMenu(); }
+});
+</script>
 </body>
 </html>
