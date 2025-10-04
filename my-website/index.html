@@ -46,9 +46,12 @@
             padding: 20px;
             border-bottom: 1px solid #ddd;
             background-color: rgba(255,255,255,0.8);
-            position: sticky;
+            position: fixed; /* 固定在最上方 */
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 10;
+            transition: top 0.3s ease;
         }
 
         .logo { height: 50px; width: auto; }
@@ -90,7 +93,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="mainHeader">
         <img src="圖片images/logo中文字.png" alt="台灣媳婦切仔麵 Logo" class="logo">
         <img src="圖片images/hamburger.png" 
              alt="漢堡選單" 
@@ -132,6 +135,9 @@
     </footer>
 
     <script>
+        let lastScrollTop = 0;
+        const header = document.getElementById('mainHeader');
+
         function toggleMenu(button){
             const nav = document.getElementById('navMenu');
             nav.classList.toggle('show');
@@ -150,14 +156,28 @@
             button.src = button.dataset.hamburger;
         }
 
-        // 一滑動就自動收合選單
+        // 偵測捲動，自動收合選單 + header 自動隱藏/顯示
         window.addEventListener('scroll', function(){
             const nav = document.getElementById('navMenu');
             const button = document.querySelector('.hamburger');
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+
+            // 選單自動收合
             if(nav.classList.contains('show')){
                 nav.classList.remove('show');
                 button.src = button.dataset.hamburger;
             }
+
+            // header 自動隱藏/顯示
+            if(st > lastScrollTop){
+                // 下滑 → 隱藏 header
+                header.style.top = '-100px';
+            } else {
+                // 上滑 → 顯示 header
+                header.style.top = '0';
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
         });
     </script>
 </body>
