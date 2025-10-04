@@ -5,22 +5,25 @@
 <title>台灣媳婦</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-html, body {margin:0; padding:0; min-height:100%; font-family:sans-serif;}
-
-/* 背景圖層，覆蓋全頁並跟隨滾動 */
-body::before{
-    content:"";
-    position:absolute; top:0; left:0; width:100%; height:100%;
-    z-index:-2;
+/* 基本設定 */
+html, body {
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+    min-height:100%;
+    position:relative;
     background-image: url('圖片images/背景圖.jpeg'), url('圖片images/背景圖2.jpeg'), url('圖片images/背景圖3.jpeg');
     background-repeat: repeat;
     background-size: cover;
-    background-attachment: scroll; /* 跟隨滾動 */
+    background-attachment: scroll; /* 背景隨內容滾動 */
 }
 
-body::after{
+/* 模糊半透明遮罩 */
+body::after {
     content:"";
-    position:absolute; top:0; left:0; width:100%; height:100%;
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
     background-color: rgba(255,255,255,0.2);
     backdrop-filter: blur(8px);
     z-index:-1;
@@ -28,9 +31,13 @@ body::after{
 
 /* Header */
 header {
-    position:fixed; top:0; left:0; width:100%; z-index:10;
-    height:70px; transition: top 0.3s ease;
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:70px;
+    z-index:10;
     background-color: rgba(255,255,255,0.8);
+    transition: top 0.3s ease;
 }
 
 /* 漢堡按鈕 */
@@ -40,7 +47,8 @@ header {
     z-index:11;
 }
 .hamburger img {
-    position:absolute; top:0; left:0; width:100%; height:100%;
+    position:absolute; top:0; left:0;
+    width:100%; height:100%;
     transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
     transform-origin:center center;
 }
@@ -58,16 +66,29 @@ header .logo {
 
 /* nav */
 nav {
-    position:absolute; top:70px; left:0; width:100%;
-    flex-direction:column; background-color: rgba(255,255,255,0.95);
-    max-height:0; overflow:hidden; transition:max-height 0.3s ease-out;
-    display:flex; gap:20px; z-index:10;
+    position:absolute;
+    top:70px; left:0;
+    width:100%;
+    flex-direction:column;
+    background-color: rgba(255,255,255,0.95);
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease-out;
+    display:flex;
+    gap:20px;
+    z-index:10;
 }
 nav.show { max-height:300px; }
 nav a { margin:15px 20px; text-decoration:none; color:#333; }
 
 /* Hero & 內容 */
-.hero{height:70vh; display:flex; justify-content:center; align-items:center; text-align:center;}
+.hero{
+    height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
 .hero h1{font-size:48px; margin:0;}
 section{padding:60px 20px; max-width:1000px; margin:auto;}
 footer{text-align:center; padding:20px; background:#f2f2f2; margin-top:40px;}
