@@ -107,9 +107,7 @@
 
         /* 手機版漢堡選單 */
         @media (max-width: 600px) {
-            .hamburger {
-                display: block;
-            }
+            .hamburger { display: block; }
 
             nav {
                 position: absolute;
@@ -127,9 +125,7 @@
                 margin: 15px 20px;
             }
 
-            nav.show {
-                max-height: 300px; /* 展開高度，可調整 */
-            }
+            nav.show { max-height: 300px; }
         }
     </style>
 </head>
@@ -171,12 +167,12 @@
     </footer>
 
     <script>
-        function toggleMenu(button) {
+        function toggleMenu(button){
             const nav = document.getElementById('navMenu');
-            nav.classList.toggle('show'); // 展開 / 收合選單
+            nav.classList.toggle('show');
 
-            // 切換漢堡圖 / X 圖
-            if(button.src.includes('hamburger.png')){
+            // 切換漢堡圖 / 叉叉圖
+            if(button.src.includes('漢堡按鈕.png')){
                 button.src = '圖片images/叉叉按鈕.png';
             } else {
                 button.src = '圖片images/漢堡按鈕.png';
