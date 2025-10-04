@@ -5,11 +5,17 @@
 <title>臺灣媳婦</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+/* 載入王羲之字體 */
+@font-face {
+    font-family: "WangXizhi";
+    src: url("fonts/WangXizhi.ttf") format("truetype");
+}
+
 /* 基本設定 */
 html, body {
     margin:0;
     padding:0;
-    font-family:sans-serif;
+    font-family: "WangXizhi", serif;
     min-height:100%;
     position:relative;
     background-image: url('圖片images/背景圖.jpeg'), url('圖片images/背景圖2.jpeg'), url('圖片images/背景圖3.jpeg');
@@ -104,10 +110,10 @@ footer{
 <body>
 <header id="mainHeader">
     <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
-        <img src="圖片images/hamburger.png" class="hamburger-img" alt="漢堡按鈕" onerror="this.src='https://via.placeholder.com/40?text=%E6%BC%A2%E8%85%BF'">
-        <img src="圖片images/close.png" class="close" alt="叉叉按鈕" onerror="this.src='https://via.placeholder.com/40?text=X'">
+        <img src="圖片images/漢堡按鈕.png" class="hamburger-img" alt="漢堡按鈕">
+        <img src="圖片images/叉叉按鈕.png" class="close" alt="叉叉按鈕">
     </div>
-    <img src="圖片images/logo中文字.png" class="logo" alt="臺灣媳婦 Logo" onerror="this.src='https://via.placeholder.com/150x50?text=Logo'">
+    <img src="圖片images/logo中文字.png" class="logo" alt="臺灣媳婦 Logo">
     <nav id="navMenu">
         <a href="#about" onclick="closeMenu()">關於我們</a>
         <a href="#products" onclick="closeMenu()">產品介紹</a>
