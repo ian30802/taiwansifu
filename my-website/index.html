@@ -22,29 +22,15 @@ body::after{
 }
 
 header {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:20px; background-color: rgba(255,255,255,0.8);
-    border-bottom:1px solid #ddd;
     position:fixed; top:0; left:0; width:100%; z-index:10;
-    transition: top 0.3s ease;
-    max-width:1200px; margin:0 auto; flex-wrap:wrap;
+    height:70px; transition: top 0.3s ease;
+    background-color: rgba(255,255,255,0.8);
 }
 
-.logo{height:50px; width:auto;}
-nav{
-    display:flex; flex-wrap:wrap; gap:20px; flex-shrink:1;
-}
-nav a{ text-decoration:none; color:#333; }
-
-.hero{height:70vh; display:flex; justify-content:center; align-items:center; text-align:center;}
-.hero h1{font-size:48px; margin:0;}
-
-section{padding:60px 20px; max-width:1000px; margin:auto;}
-footer{text-align:center; padding:20px; background:#f2f2f2; margin-top:40px;}
-
-/* 漢堡/叉叉按鈕容器 */
+/* 漢堡按鈕 */
 .hamburger {
-    display:none; width:40px; height:40px; cursor:pointer; position:relative;
+    position:absolute; top:15px; left:20px;
+    width:40px; height:40px; cursor:pointer;
 }
 .hamburger img {
     position:absolute; top:0; left:0; width:100%; height:100%;
@@ -55,26 +41,37 @@ footer{text-align:center; padding:20px; background:#f2f2f2; margin-top:40px;}
 .hamburger.active img.hamburger-img {opacity:0; transform: rotate(-180deg) scale(0.5);}
 .hamburger.active img.close {opacity:1; transform: rotate(0deg) scale(1);}
 
-/* 手機版樣式 */
-@media(max-width:600px){
-    .hamburger{display:block;}
-    nav{
-        position:absolute; top:70px; left:0; width:100%;
-        flex-direction:column; background-color: rgba(255,255,255,0.95);
-        max-height:0; overflow:hidden; transition:max-height 0.3s ease-out;
-    }
-    nav.show{ max-height:300px; }
-    nav a{ margin:15px 20px; }
+/* Logo 置中 */
+header .logo {
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%, -50%);
+    height:50px;
 }
+
+/* nav 選單 */
+nav {
+    position:absolute; top:70px; left:0; width:100%;
+    flex-direction:column; background-color: rgba(255,255,255,0.95);
+    max-height:0; overflow:hidden; transition:max-height 0.3s ease-out;
+    display:flex; gap:20px;
+}
+nav.show { max-height:300px; }
+nav a { margin:15px 20px; text-decoration:none; color:#333; }
+
+/* Hero & 內容 */
+.hero{height:70vh; display:flex; justify-content:center; align-items:center; text-align:center;}
+.hero h1{font-size:48px; margin:0;}
+section{padding:60px 20px; max-width:1000px; margin:auto;}
+footer{text-align:center; padding:20px; background:#f2f2f2; margin-top:40px;}
 </style>
 </head>
 <body>
 <header id="mainHeader">
-    <img src="圖片images/logo中文字.png" class="logo" alt="台灣媳婦 Logo">
     <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
         <img src="圖片images/漢堡按鈕.png" class="hamburger-img" alt="漢堡按鈕">
         <img src="圖片images/叉叉按鈕.png" class="close" alt="叉叉按鈕">
     </div>
+    <img src="圖片images/logo中文字.png" class="logo" alt="台灣媳婦 Logo">
     <nav id="navMenu">
         <a href="#about" onclick="closeMenu()">關於我們</a>
         <a href="#products" onclick="closeMenu()">產品介紹</a>
@@ -121,15 +118,11 @@ function closeMenu(){
     hamburger.classList.remove('active');
 }
 
-// header 自動隱藏/顯示 & 滑動收合選單
+// 下滑收起 header，上滑顯示 & 滑動自動收合選單
 window.addEventListener('scroll', function(){
     let st = window.pageYOffset || document.documentElement.scrollTop;
-
-    // header 下滑隱藏，上滑顯示
     if(st > lastScrollTop){ header.style.top='-100px'; } else { header.style.top='0'; }
     lastScrollTop = st<=0 ? 0 : st;
-
-    // 滾動時自動收合選單
     if(nav.classList.contains('show')){ closeMenu(); }
 });
 </script>
